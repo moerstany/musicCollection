@@ -1,0 +1,69 @@
+﻿create table tab_musicCollection3(
+id INT NOT NULL PRIMARY KEY auto_increment,
+song_name nvarchar(100) NOT NULL check( song_name != '' ),
+song_time double  NOT Null  check ( song_time>0),
+music_style nvarchar (100) NOT NULL check( music_style != '' ),
+singer_id int NOT Null,
+foreign key (singer_id) references tab_singers3(singer_id)
+    on delete no action
+    on update no action    ,
+music_disk_id  int NOT Null,
+ foreign key (music_disk_id) references tab_music_disk3(music_disk_id )
+    on delete no action
+    on update no action                               
+);
+
+create table tab_singers3(
+singer_id INT NOT NULL PRIMARY KEY auto_increment,
+singer nvarchar(100) NOT NULL check( singer != '' )
+);
+
+create table tab_music_disk3(
+music_disk_id INT NOT NULL PRIMARY KEY auto_increment,
+music_disk_name nvarchar(100) NOT NULL check( music_disk_name != '' )
+);
+
+INSERT INTO host1323541_sbd04.tab_singers3 ( singer_id, singer)
+VALUES ( DEFAULT,'Агата кристи'),
+       ( DEFAULT,'Атлантида прожект'),
+       ( DEFAULT,'ТоТо')
+;
+
+INSERT INTO host1323541_sbd04.tab_music_disk3 ( music_disk_id, music_disk_name)
+VALUES ( DEFAULT, 'Бомба'),
+       ( DEFAULT, 'Сказки'),
+       ( DEFAULT,'Разум'),
+       ( DEFAULT,'Растафарай'),
+       ( DEFAULT,'Море'),
+       ( DEFAULT,'Джа')
+       ;
+drop table tab_musicCollection;
+drop table tab_исполнители;
+drop table tab_музыкдиски;
+
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Сердцебиение', '3.25', 'рок', '1', '1');
+
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Черная луна', '3.00', 'рок', '1', '1');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Опиум для никого', '3.05', 'рок', '1', '1');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Моряк', '2.25', 'рок', '1', '2');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Два корабля', '3.35', 'рок', '1', '2');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Чистое зло', '4.25', 'электро', '2', '3');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Иордан', '4.35', 'электро', '2', '3');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Помни', '2.65', 'рэгги', '3', '4');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Море', '2.35', 'рэгги', '3', '4');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Сангариджа', '3.35', 'рэгги', '3', '4');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Jah', '3.45', 'рэгги', '3', '5');
+INSERT INTO host1323541_sbd04.tab_musicCollection3 (id, song_name, song_time,music_style, singer_id, music_disk_id)
+VALUES (DEFAULT, 'Вдалибонга', '3.35', 'рэгги', '3', '6');
+ 

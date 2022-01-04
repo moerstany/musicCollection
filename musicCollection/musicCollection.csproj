@@ -5,4 +5,27 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0-preview2.21264.2" />
+      <PackageReference Include="MySql.Data" Version="8.0.27" />
+      <PackageReference Include="MySql.Data.Entities" Version="6.8.3" />
+      <PackageReference Include="MySqlConnector" Version="1.4.0-beta.4" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="bin\db_connect.ini">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Include="bin\Debug\net5.0\db_connect.ini">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="bin\Debug\net5.0\music.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

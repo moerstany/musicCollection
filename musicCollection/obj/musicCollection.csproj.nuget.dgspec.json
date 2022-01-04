@@ -43,6 +43,28 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.0.0-preview2.21264.2, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.27, )"
+            },
+            "MySql.Data.Entities": {
+              "target": "Package",
+              "version": "[6.8.3, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[1.4.0-beta.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
