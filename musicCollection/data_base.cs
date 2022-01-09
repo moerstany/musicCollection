@@ -153,29 +153,57 @@ namespace musicCollection
         }
 
        
-
-       /* public static string ToFormatedString(this Music music)
-        {
-            return  String.Format("id:[0] \t song_name: [1] \t song_time: [2] \t music_style: [3] \t music_disk_name :[4] \t singer: [5] \t", music.id, music.song_name,music.song_time,music.music_disk_name,music.singer);
-        }*/
         public static void DeSerialiseMusicToJson(string path)
         {
             
             var reader = File.ReadAllText(path);
 
-            var getmusics = Newtonsoft.Json.JsonConvert.DeserializeObject<Music>(reader);
+            var getmusics = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Music>>(reader);
 
            // Console.WriteLine(getmusics.ToFormatedString());
-
-           Console.WriteLine(String.Format($"{getmusics.id} ; {getmusics.song_name} ; {getmusics.song_time} ; {getmusics.music_style} ; {getmusics.singer} ; {getmusics.music_disk_name}"));
-              
-                                            
-                                           // $"{getmusics.id}  | {getmusics.song_name} | {getmusics.song_time} | {getmusics.music_style} | {getmusics.singer} | {getmusics.music_disk_name}"));
-
-
+           foreach (var music in getmusics)
+           {
+               Console.WriteLine(String.Format($"{music.id} | {music.song_name} | {music.song_time} | {music.music_style} | {music.singer} | {music.music_disk_name}"));
+           }   
+           
         }
-        
-        
+
+        public List<Music_disk> GetSingerDisk()
+        {
+            Console.WriteLine("Выберете номер исполнителя из списка");
+            var input1 = Convert.ToInt32(Console.ReadLine());
+            Open();
+
+            var list = new List<Music_disk>();
+
+            var sql = string.Format($@"SELECT music_disk_id, singer, music_disk_name
+                        FROM tab_musicCollection3
+                        JOIN tab_music_disk3 
+                            ON tab_musicCollection3.music_disk_id = tab_music_disk3.music_disk_id
+                        JOIN tab_singers3 
+                            ON tab_musicCollection3.singer_id = tab_singers3.singer_id
+                        WHERE singer_id = '{input1 }' ");
+
+        command.CommandText = sql;
+            var res = command.ExecuteReader();
+            if (!res.HasRows) return null;
+
+            while (res.Read())
+            {
+                var music_disk_id = res.GetUInt32("music_disk_id");
+                var singer = res.GetString("singer");
+                var music_disk_name = res.GetString("music_disk_name");
+                list.Add(new Music_disk()
+                {
+                    music_disk_id = music_disk_id, 
+                    singer = singer, music_disk_name = music_disk_name
+                });
+            }
+
+            Close();
+
+            return list;
+        }
 
 
         /*var getmusics = JsonMusics();

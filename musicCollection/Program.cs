@@ -31,11 +31,12 @@ namespace musicCollection
                         Database.DeSerialiseMusicToJson("music.json");
                         break;
                     case "3":
-                       
+                        ReadSingers();
                         
                         break;
                     case "4":
                         ;
+                        
                         break;
                     case "5":
                         ;

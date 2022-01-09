@@ -28,4 +28,10 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="bin\Debug\net5.0\music.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
