@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json;
+using System.Xml;
+using System.Xml.Serialization;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -205,6 +207,36 @@ namespace musicCollection
             return list;
         }
 
+        public  void SerialiseMusicToXml(string path)
+        {
+            // using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            var xmlMusics = GetSingerDisk();
+           XmlSerializer xmlObject = new XmlSerializer(typeof(List<Music_disk>));
+           // Console.WriteLine("Data has been saved to xml file");
+           //Console.WriteLine(xmlObject);
+           // File.WriteAllText(path, String.Empty);
+           TextWriter Filestream= new StreamWriter(path);
+           xmlObject.Serialize(Filestream,xmlMusics);
+           Filestream.Close();
+
+
+        }
+
+       
+        public static void DeSerialiseMusicToXml(string path)
+        {
+            
+            var reader = File.ReadAllText(path);
+
+            var getmusics = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Music>>(reader);
+
+            // Console.WriteLine(getmusics.ToFormatedString());
+            foreach (var music in getmusics)
+            {
+                Console.WriteLine(String.Format($"{music.id} | {music.song_name} | {music.song_time} | {music.music_style} | {music.singer} | {music.music_disk_name}"));
+            }   
+           
+        }
 
         /*var getmusics = JsonMusics();
         using (var file_input = new FileStream(path, FileMode.Open))

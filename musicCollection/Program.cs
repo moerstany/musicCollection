@@ -32,6 +32,7 @@ namespace musicCollection
                         break;
                     case "3":
                         ReadSingers();
+                        ExportMusicDiskToXml();
                         
                         break;
                     case "4":
@@ -80,7 +81,12 @@ namespace musicCollection
                 db.SerialiseMusicToJson("music.json");
             }
             
-           
+            static void ExportMusicDiskToXml()
+            {
+                var db = new Database();
+                
+                db.SerialiseMusicToXml("music.xml");
+            }
         }
 
        
