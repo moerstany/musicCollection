@@ -31,20 +31,19 @@ namespace musicCollection
                         Database.DeSerialiseMusicToJson("music.json");
                         break;
                     case "3":
+                        Console.WriteLine("выберете из списка номер исполнителя");
                         ReadSingers();
                         ExportMusicDiskToXml();
-                        
+                        Database.DeSerialiseMusicToXml("music.xml");
                         break;
                     case "4":
-                        ;
+                        PrintPopularSinger();
                         
                         break;
                     case "5":
-                        ;
+                        PrintLongerSong();
                         break;
-                    case "6":
-                        ;
-                        break;
+                   
 
                     case "0":
                         Console.WriteLine("До свидания");
@@ -86,6 +85,19 @@ namespace musicCollection
                 var db = new Database();
                 
                 db.SerialiseMusicToXml("music.xml");
+            }
+            static void PrintPopularSinger()
+            {
+                var db = new Database();
+                
+                db.PrintPopularsinger();
+            }
+            
+            static void PrintLongerSong()
+            {
+                var db = new Database();
+
+                db.PrintLongerSong();
             }
         }
 

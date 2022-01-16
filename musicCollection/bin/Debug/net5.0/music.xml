@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMusic_disk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Music_disk>
+    <music_disk_id>0</music_disk_id>
+    <music_disk_name>Растафарай</music_disk_name>
+    <singer_id>0</singer_id>
+    <singer>ТоТо</singer>
+  </Music_disk>
+  <Music_disk>
+    <music_disk_id>0</music_disk_id>
+    <music_disk_name>Растафарай</music_disk_name>
+    <singer_id>0</singer_id>
+    <singer>ТоТо</singer>
+  </Music_disk>
+  <Music_disk>
+    <music_disk_id>0</music_disk_id>
+    <music_disk_name>Растафарай</music_disk_name>
+    <singer_id>0</singer_id>
+    <singer>ТоТо</singer>
+  </Music_disk>
+  <Music_disk>
+    <music_disk_id>0</music_disk_id>
+    <music_disk_name>Море</music_disk_name>
+    <singer_id>0</singer_id>
+    <singer>ТоТо</singer>
+  </Music_disk>
+  <Music_disk>
+    <music_disk_id>0</music_disk_id>
+    <music_disk_name>Джа</music_disk_name>
+    <singer_id>0</singer_id>
+    <singer>ТоТо</singer>
+  </Music_disk>
+</ArrayOfMusic_disk>

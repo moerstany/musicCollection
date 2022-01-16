@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
@@ -178,13 +179,13 @@ namespace musicCollection
 
             var list = new List<Music_disk>();
 
-            var sql = string.Format($@"SELECT music_disk_id, singer, music_disk_name
-                        FROM tab_musicCollection3
+            var sql = string.Format($@"SELECT  singer, music_disk_name
+                        FROM tab_musicCollection3 
                         JOIN tab_music_disk3 
                             ON tab_musicCollection3.music_disk_id = tab_music_disk3.music_disk_id
                         JOIN tab_singers3 
                             ON tab_musicCollection3.singer_id = tab_singers3.singer_id
-                        WHERE singer_id = '{input1 }' ");
+                        WHERE tab_musicCollection3.singer_id = '{input1 }';");
 
         command.CommandText = sql;
             var res = command.ExecuteReader();
@@ -192,12 +193,12 @@ namespace musicCollection
 
             while (res.Read())
             {
-                var music_disk_id = res.GetUInt32("music_disk_id");
+                //var music_disk_id = res.GetUInt32("music_disk_id");
                 var singer = res.GetString("singer");
                 var music_disk_name = res.GetString("music_disk_name");
                 list.Add(new Music_disk()
                 {
-                    music_disk_id = music_disk_id, 
+                    //music_disk_id = music_disk_id, 
                     singer = singer, music_disk_name = music_disk_name
                 });
             }
@@ -226,24 +227,113 @@ namespace musicCollection
         public static void DeSerialiseMusicToXml(string path)
         {
             
-            var reader = File.ReadAllText(path);
+            var serializer = new XmlSerializer(typeof(List<Music_disk>));
 
-            var getmusics = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Music>>(reader);
+            var getmusics1 = new StreamReader(path);
+            var getmusics = (List<Music_disk>)serializer.Deserialize(getmusics1);
+            
 
             // Console.WriteLine(getmusics.ToFormatedString());
             foreach (var music in getmusics)
             {
-                Console.WriteLine(String.Format($"{music.id} | {music.song_name} | {music.song_time} | {music.music_style} | {music.singer} | {music.music_disk_name}"));
+                Console.WriteLine(String.Format($"{music.singer} | {music.music_disk_name} "));
             }   
            
         }
-
-        /*var getmusics = JsonMusics();
-        using (var file_input = new FileStream(path, FileMode.Open))
+        public  List<Music_disk> GetSingerPopular()
         {
-            
-        }*/
+            Open();
 
+            var list = new List<Music_disk>();
+
+            var sql = string.Format($@" SELECT  singer,
+COUNT(tab_music_disk3.music_disk_id) AS '{"Количество дисков исполнителя в коллекции"}'
+             FROM tab_musicCollection3
+            JOIN tab_music_disk3
+            ON tab_musicCollection3.music_disk_id = tab_music_disk3.music_disk_id
+            JOIN tab_singers3
+            ON tab_musicCollection3.singer_id = tab_singers3.singer_id
+            GROUP BY singer
+            ORDER BY (COUNT(tab_music_disk3.music_disk_id)) DESC ;");
+
+            command.CommandText = sql;
+            var res = command.ExecuteReader();
+            if (!res.HasRows) return null;
+
+            while (res.Read())
+            {
+                //var music_disk_id = res.GetUInt32("music_disk_id");
+                var singer = res.GetString("singer");
+               var vol=res.GetUInt32("Количество дисков исполнителя в коллекции");
+                list.Add(new Music_disk()
+                {
+                    //music_disk_id = music_disk_id, 
+                    singer = singer
+                });
+            }
+
+            Close();
+
+            return list;
+        }
+
+        public  void PrintPopularsinger()
+        {
+            var getmusics =  GetSingerPopular();
+            
+
+            // Console.WriteLine(getmusics.ToFormatedString());
+            foreach (var music in getmusics)
+            {
+                Console.WriteLine(String.Format($"{music.singer} "));
+            }   
+           
+        }
+        
+        public  List<Music> GetLongerSong()
+        {
+            Open();
+
+            var list = new List<Music>();
+
+            var sql = string.Format($@" SELECT  song_name, song_time
+            FROM tab_musicCollection3
+            ORDER BY song_time DESC ;");
+
+            command.CommandText = sql;
+            var res = command.ExecuteReader();
+            if (!res.HasRows) return null;
+
+            while (res.Read())
+            {
+                //var music_disk_id = res.GetUInt32("music_disk_id");
+                var song_name = res.GetString("song_name");
+                var song_time=res.GetUInt32("song_time");
+                list.Add(new Music()
+                {
+                    //music_disk_id = music_disk_id, 
+                    song_name = song_name, song_time = song_time
+                });
+            }
+
+            Close();
+
+            return list;
+        }
+        
+        public  void PrintLongerSong()
+        {
+            var getmusics = GetLongerSong();
+            
+
+            // Console.WriteLine(getmusics.ToFormatedString());
+            foreach (var music in getmusics)
+            {
+                Console.WriteLine(String.Format($"{music.song_name} | {music.song_time}"));
+            }   
+           
+        }
+        
 
 
     }

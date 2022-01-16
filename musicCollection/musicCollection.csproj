@@ -34,4 +34,14 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="bin\Debug\net5.0\music.xml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="obj\MusicCollect.cs" />
+    </ItemGroup>
+
 </Project>
